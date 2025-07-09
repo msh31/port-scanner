@@ -48,7 +48,7 @@ Educational project exploring network programming fundamentals through progressi
 ```bash
 mkdir build && cd build
 cmake ..
-make
+cmake --build .
 ```
 
 ---

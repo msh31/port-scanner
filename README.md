@@ -1,72 +1,67 @@
 # Port Scanner
 
-A high-performance network port scanner built in C++ for learning networking concepts and system programming.
+A C++ network port scanner for learning socket programming and networking fundamentals.
 
-## 🎯 Project Overview
+## 🎯 Current Features
 
-Educational project exploring network programming fundamentals through progressive port scanning toolkit development. Demonstrates practical socket programming, multi-threading, and network security concepts.
+**Working Implementation:**
+- Multi-port TCP connection testing
+- Predefined common service port scanning
+- Clean output showing only open ports
+- Proper socket lifecycle management
+- Input validation and error handling
 
-**Skills Demonstrated:**
-- Winsock API and network programming
-- Multi-threaded concurrent processing  
-- Socket management and error handling
-- Performance optimization techniques
-
----
-
-## 📚 Development Roadmap
-
-### Phase 1: Foundation
-- Single-port TCP connection testing
-- Basic socket creation and RAII management
-- Timeout and error handling
-
-### Phase 2: Multi-Port Scanning  
-- Sequential and concurrent port range scanning
-- Thread pool optimization
-- Progress reporting
-
-### Phase 3: Advanced Features
-- Service detection and banner grabbing
-- Multiple scan types (SYN, UDP, stealth)
-- Network range scanning (CIDR support)
-
-### Phase 4: Professional Tools
-- GUI interface development
-- Configuration and reporting systems
+**Sample Output:**
+```
+Enter target IP (or 'quit' / 'q' to exit): 127.0.0.1
+Scanning 127.0.0.1...
+Port 135 : OPEN
+Port 445 : OPEN
+Port 3389 : OPEN
+Port 5357 : OPEN
+```
 
 ---
 
-## 🔧 Build Requirements
+## 🚀 Skills Demonstrated
 
-**Environment:**
-- **Compiler**: g++ (MinGW-w64) with C++17 support
-- **Platform**: Windows  
-- **Libraries**: Winsock2
+- **Winsock API**: Socket creation, connection handling, cleanup
+- **C++ STL**: Vector containers, range-based loops
+- **Network Programming**: TCP connection testing, port enumeration
+- **Resource Management**: Proper socket lifecycle and memory cleanup
+
+---
+
+## 🔧 Build & Run
+
+**Requirements:**
+- Windows 10/11
+- g++ with C++17 support
+- CMake 3.13+
 
 **Build:**
 ```bash
 mkdir build && cd build
 cmake ..
 cmake --build .
+../port-scanner.exe
 ```
 
 ---
 
-## ⚖️ Ethical Guidelines
+## 📚 Development Roadmap
 
-**Approved Usage:**
-- Educational networking exploration
-- Testing on personal/owned networks and devices
-- Authorized security research
-- Portfolio development
+### ✅ Phase 1: Foundation (Complete)
+- Multi-port TCP scanning
+- Socket management
+- Basic error handling
 
-**Important:** Only scan systems you own or have explicit permission to test. Comply with local laws and organizational policies.
+### 🔄 Phase 2: Enhanced Scanning
+- Connection timeouts
+- Threading for faster scans
+- Port range selection
 
----
-
-## 🔗 Related Projects
-
-**[Memory Analysis Toolkit](https://github.com/msh31/memory-analysis-toolkit)** - C++ process memory manipulation and reverse engineering tools
-
-*Part of a comprehensive systems programming learning journey exploring both memory forensics and network security concepts.*
+### 🎯 Phase 3: Advanced Features
+- Service detection
+- UDP scanning
+- GUI interface

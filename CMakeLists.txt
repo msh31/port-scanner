@@ -12,4 +12,8 @@ set(SOURCE_FILES main.cpp)
 
 add_executable(port-scanner ${SOURCE_FILES})
 
+target_include_directories(port-scanner PRIVATE
+    libs/ascii-art
+)
+
 target_link_libraries(port-scanner PRIVATE -lws2_32)

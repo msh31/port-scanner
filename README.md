@@ -49,19 +49,5 @@ cmake --build .
 
 ---
 
-## 📚 Development Roadmap
-
-### ✅ Phase 1: Foundation (Complete)
-- Multi-port TCP scanning
-- Socket management
-- Basic error handling
-
-### 🔄 Phase 2: Enhanced Scanning
-- Connection timeouts
-- Threading for faster scans
-- Port range selection
-
-### 🎯 Phase 3: Advanced Features
-- Service detection
-- UDP scanning
-- GUI interface
+## 📗 References
+- [Ascii Art](https://github.com/codewithnick/ascii-art), awesome simple library to use ASCII text within CLI projects

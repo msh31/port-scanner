@@ -59,8 +59,3 @@ cmake ..
 cmake --build .
 ../port-scanner.exe
 ```
-
----
-
-## 📗 References
-- [Ascii Art](https://github.com/codewithnick/ascii-art), awesome simple library to use ASCII text within CLI projects

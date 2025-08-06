@@ -2,3 +2,6 @@
 *.exe
 build/*
 Debug/*
+.idea/*
+port-scanner
+.DS_STORE

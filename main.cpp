@@ -2,35 +2,13 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
-    #include <winsock2.h>
-    #include <ws2tcpip.h>
-    #pragma comment(lib, "ws2_32.lib")
-    #define CLOSE_SOCKET(s) closesocket(s)
-    #define SOCKADDR_CAST (SOCKADDR *)
-#else
-    #include <sys/socket.h>
-    #include <netinet/in.h>
-    #include <arpa/inet.h>
-    #include <unistd.h>
-    #define CLOSE_SOCKET(s) close(s)
-    #define SOCKET int
-    #define INVALID_SOCKET (-1)
-    #define SOCKET_ERROR (-1)
-    #define SOCKADDR_CAST (struct sockaddr *)
-#endif
+#include "socket_wrapper.h"
 
 sockaddr_in service;
 std::string ipAddress;
 std::vector portList = {
     21, 22, 23, 25, 53, 80, 81, 110, 135, 143, 443, 445, 993, 995, 2375, 2376, 3096, 3097, 3389, 5357
 };
-
-void cleanExit() {
-#ifdef _WIN32
-    WSACleanup();
-#endif
-}
 
 void getIpAddress() {
     bool finished = false;
@@ -41,7 +19,6 @@ void getIpAddress() {
 
         if (ipAddress == "quit" || ipAddress == "q") {
             std::cout << "Exiting...\n";
-            cleanExit();
             exit(0);
         }
 
@@ -64,7 +41,7 @@ void quickScan() {
     std::cout << "\n[Quick Scan] Scanning common ports...\n";
 
     for (const auto &ports : portList) {
-        SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        SocketWrapper clientSocket(socket(AF_INET, SOCK_STREAM, IPPROTO_TCP));
 
         if (clientSocket == INVALID_SOCKET) {
             std::cout << "Port " << ports << " : ERROR (couldn't create socket)\n";
@@ -79,8 +56,6 @@ void quickScan() {
         } else {
             std::cout << "Port " << ports << " : CLOSED\n";
         }
-
-        CLOSE_SOCKET(clientSocket);
     }
 }
 
@@ -104,7 +79,7 @@ void customPortRange() {
 
     int openPorts = 0;
     for (int port = startPort; port <= endPort; ++port) {
-        SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        SocketWrapper clientSocket(socket(AF_INET, SOCK_STREAM, IPPROTO_TCP));
 
         if (clientSocket == INVALID_SOCKET) {
             continue;
@@ -117,8 +92,6 @@ void customPortRange() {
             std::cout << "Port " << port << " : OPEN\n";
             openPorts++;
         }
-
-        CLOSE_SOCKET(clientSocket);
     }
 
     std::cout << "Found " << openPorts << " open ports.\n";
@@ -164,7 +137,6 @@ int main() {
                 break;
             case 3:
                 std::cout << "Exiting...\n";
-                cleanExit();
                 return 0;
             default:
                 std::cout << "Invalid choice. Try again.\n";
@@ -172,6 +144,5 @@ int main() {
 
     } while (choice != 3);
 
-    cleanExit();
     return 0;
 }
